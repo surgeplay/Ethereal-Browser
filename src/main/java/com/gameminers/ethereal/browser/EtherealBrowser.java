@@ -17,10 +17,12 @@
  */
 package com.gameminers.ethereal.browser;
 
+import javax.swing.JFrame;
+
 public class EtherealBrowser {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		JFrame window = new JFrame("EtherealBrowser");
 
 	}
 
