@@ -41,7 +41,7 @@ public class VersionComparator implements Comparator<File> {
 		boolean snapshot1 = s1.matches(SNAPSHOT_REGEX);
 		boolean snapshot2 = s2.matches(SNAPSHOT_REGEX);
 		boolean version1 = s1.matches(INITIAL_RELEASE_REGEX) || s1.matches(PATCH_RELEASE_REGEX);
-		boolean version2 = s2.matches(INITIAL_RELEASE_REGEX) || s1.matches(PATCH_RELEASE_REGEX);
+		boolean version2 = s2.matches(INITIAL_RELEASE_REGEX) || s2.matches(PATCH_RELEASE_REGEX);
 		if (snapshot1 != snapshot2) {
 			return snapshot1 ? 1 : -1;
 		} else if (snapshot1 && snapshot2) {
@@ -65,6 +65,7 @@ public class VersionComparator implements Comparator<File> {
 	}
 
 	private int getVersionCode(String s) {
+		System.out.println(s);
 		String[] split = s.split("\\.");
 		String major = split[0];
 		String minor = split[1];
