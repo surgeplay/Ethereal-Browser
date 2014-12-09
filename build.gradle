@@ -1,0 +1,10 @@
+repositories {
+	mavenCentral()
+	maven {
+		name  "gameminers"
+		url "http://mvn.gameminers.com/artifactory/repo"
+	}
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
