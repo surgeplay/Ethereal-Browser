@@ -22,7 +22,7 @@ import javax.swing.border.EmptyBorder;
 
 public class Components {
 
-	static Box createPaddedBox(int axis) {
+	public static Box createPaddedBox(int axis) {
 		Box box = new Box(axis);
 		box.setBorder(new EmptyBorder(8, 8, 8, 8));
 		return box;

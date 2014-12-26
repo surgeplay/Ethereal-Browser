@@ -54,7 +54,7 @@ public class EtherealBrowser {
 		
 		window.setJMenuBar(createMenuBar());
 		
-		tabs.addTab("Welcome", createWelcomeScreen());
+		tabs.addTab("", Resources.loadPNGIconAsset("iface/home"), createWelcomeScreen());
 		
 		window.setVisible(true);
 	}
@@ -74,7 +74,7 @@ public class EtherealBrowser {
 
 	private static JFrame createWindow() {
 		JFrame window = new JFrame("Ethereal Browser");
-		window.setIconImages(Resources.loadPNGAsset("browser", "browser-32"));
+		window.setIconImages(Resources.loadPNGAsset("iface/browser", "iface/browser-32"));
 		window.setSize(854, 480);
 		window.setLocationByPlatform(true);
 		window.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
@@ -86,7 +86,8 @@ public class EtherealBrowser {
 		Box box = Components.createPaddedBox(BoxLayout.Y_AXIS);
 		box.add(new JLabel("Welcome to Ethereal Browser!"));
 		box.add(new JLabel("To get started, open the File menu and choose either Open Modded, or Open Vanilla."));
-		box.add(new JLabel("If neither is enabled, no assets can be found in your Minecraft directory. This could mean it is invalid, or you've never launched Minecraft."));
+		box.add(new JLabel("If neither is enabled, no assets can be found in your Minecraft directory."));
+		box.add(new JLabel("This could mean it is invalid, or you've never launched Minecraft."));
 		box.add(Box.createVerticalStrut(24));
 		box.add(new JLabel("The current Minecraft directory is "+Paths.tildize(getMinecraftDirectory().getAbsolutePath())));
 		return box;
@@ -111,7 +112,7 @@ public class EtherealBrowser {
 
 	private static JMenu createOpenModdedMenu() {
 		JMenu menu = new JMenu("Open Modded");
-		menu.setIcon(Resources.loadPNGIconAsset("open-modded"));
+		menu.setIcon(Resources.loadPNGIconAsset("iface/open-modded"));
 		File mods = new File(minecraftDirectory, "mods");
 		if (mods.exists()) {
 			boolean global = false;
@@ -135,7 +136,7 @@ public class EtherealBrowser {
 
 	private static JMenu createOpenVanillaMenu() {
 		JMenu menu = new JMenu("Open Vanilla");
-		menu.setIcon(Resources.loadPNGIconAsset("open-vanilla"));
+		menu.setIcon(Resources.loadPNGIconAsset("iface/open-vanilla"));
 		File indexes = new File(minecraftDirectory, "assets/indexes");
 		if (indexes.exists()) {
 			for (File f : Paths.sort(indexes.listFiles())) {

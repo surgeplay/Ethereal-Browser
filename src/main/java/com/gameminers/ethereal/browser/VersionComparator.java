@@ -55,7 +55,6 @@ public class VersionComparator implements Comparator<File> {
 			int versionCode2 = getVersionCode(s2);
 			return Integer.compare(versionCode1, versionCode2);
 		} else {
-			System.out.println("? vs ?");
 			return collator.compare(s1, s2);
 		}
 	}
