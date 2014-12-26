@@ -21,12 +21,16 @@ import java.io.File;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.Icon;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
+import javax.swing.ScrollPaneConstants;
 import javax.swing.UIManager;
 import javax.swing.WindowConstants;
 
@@ -35,12 +39,18 @@ import joptsimple.OptionSet;
 import joptsimple.OptionSpec;
 
 import com.gameminers.ethereal.browser.listener.MainWindowListener;
+import com.gameminers.ethereal.browser.listener.ModdedOpenListener;
+import com.gameminers.ethereal.browser.listener.VanillaOpenListener;
 import com.gameminers.ethereal.browser.utility.Components;
 import com.gameminers.ethereal.browser.utility.Directories;
 import com.gameminers.ethereal.browser.utility.Resources;
+import com.google.gson.Gson;
 
 public class EtherealBrowser {
 	private static File minecraftDirectory;
+	public static JFrame window;
+	private static JTabbedPane tabs;
+	public static final Gson gson = new Gson();
 	public static void main(String[] args) {
 		OptionParser parser = new OptionParser();
 		OptionSpec<File> dir = parser.accepts("d", "The Minecraft directory; defaults to the platform-specific .minecraft").withRequiredArg().ofType(File.class);
@@ -52,9 +62,9 @@ public class EtherealBrowser {
 			minecraftDirectory = Directories.getAppData("minecraft");
 		}
 		initLAF();
-		JFrame window = createWindow();
+		window = createWindow();
 		
-		JTabbedPane tabs = new JTabbedPane();
+		tabs = new JTabbedPane();
 		window.add(tabs);
 		
 		window.setJMenuBar(createMenuBar());
@@ -124,14 +134,18 @@ public class EtherealBrowser {
 			for (File f : Directories.sort(mods.listFiles())) {
 				String name = f.getName();
 				if (f.isDirectory() && (name.contains(".") || name.matches("[0-9][0-9]w[0-9][0-9][a-z]") )) {
-					menu.add(new JMenuItem(name));
+					JMenuItem item = new JMenuItem(name);
+					item.addActionListener(new ModdedOpenListener(f));
+					menu.add(item);
 				}
 				if (f.isFile() && (name.endsWith(".jar") || name.endsWith(".zip"))) {
 					global = true;
 				}
 			}
 			if (global) {
-				menu.insert(new JMenuItem("Global"), 0);
+				JMenuItem item = new JMenuItem("Global");
+				item.addActionListener(new ModdedOpenListener(mods));
+				menu.insert(item, 0);
 			}
 		} else {
 			menu.setEnabled(false);
@@ -148,6 +162,7 @@ public class EtherealBrowser {
 				String name = f.getName();
 				if (name.endsWith(".json")) {
 					JMenuItem item = new JMenuItem(name.substring(0, name.length()-5));
+					item.addActionListener(new VanillaOpenListener(f, new File(minecraftDirectory, "assets/objects")));
 					menu.add(item);
 				}
 			}
@@ -155,6 +170,10 @@ public class EtherealBrowser {
 			menu.setEnabled(false);
 		}
 		return menu;
+	}
+
+	public static void addDocument(String name, Icon icon, JComponent comp) {
+		tabs.addTab(name, icon, new JScrollPane(comp, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED));
 	}
 
 }

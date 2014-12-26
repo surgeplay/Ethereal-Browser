@@ -15,18 +15,22 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.gameminers.ethereal.browser.glue;
+package com.gameminers.ethereal.browser.listener;
 
-public class Asset {
-	public String name;
-	public String path;
-	public String contentType;
-	
-	public String hash;
-	public long size;
-	
-	@Override
-	public String toString() {
-		return name;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
+
+public class ModdedOpenListener implements ActionListener {
+	private final File folder;
+	public ModdedOpenListener(File folder) {
+		this.folder = folder;
 	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
 }

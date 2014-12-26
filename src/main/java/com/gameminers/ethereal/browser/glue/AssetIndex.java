@@ -20,5 +20,6 @@ package com.gameminers.ethereal.browser.glue;
 import java.util.Map;
 
 public class AssetIndex {
+	public String name;
 	public Map<String, Asset> objects;
 }

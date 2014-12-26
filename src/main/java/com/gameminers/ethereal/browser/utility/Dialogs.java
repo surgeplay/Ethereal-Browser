@@ -15,18 +15,18 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.gameminers.ethereal.browser.glue;
+package com.gameminers.ethereal.browser.utility;
 
-public class Asset {
-	public String name;
-	public String path;
-	public String contentType;
-	
-	public String hash;
-	public long size;
-	
-	@Override
-	public String toString() {
-		return name;
+import javax.swing.JOptionPane;
+
+import com.gameminers.ethereal.browser.EtherealBrowser;
+
+public class Dialogs {
+
+	public static void showErrorDialog(String message, Throwable t) {
+		t.printStackTrace();
+		JOptionPane.showMessageDialog(EtherealBrowser.window, message+"\n"+t.toString()+"\n\nSee the console for more details.", "Error",
+			JOptionPane.ERROR_MESSAGE, Resources.getPNGIconAsset("iface/error-32"));
 	}
+
 }

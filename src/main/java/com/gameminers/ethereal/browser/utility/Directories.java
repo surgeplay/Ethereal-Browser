@@ -20,7 +20,7 @@ package com.gameminers.ethereal.browser.utility;
 import java.io.File;
 import java.util.Arrays;
 
-import com.gameminers.ethereal.browser.comparator.VersionComparator;
+import com.gameminers.ethereal.browser.ext.VersionComparator;
 
 public class Directories {
 	private static final boolean TILDIZE = getOS() == OperatingSystem.LINUX ||
