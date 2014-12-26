@@ -15,14 +15,17 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.gameminers.ethereal.browser;
+package com.gameminers.ethereal.browser.utility;
 
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import javax.swing.Box;
+import javax.swing.border.EmptyBorder;
 
-public class MainWindowListener extends WindowAdapter {
-	@Override
-	public void windowClosing(WindowEvent e) {
-		System.exit(0); // TODO
+public class Components {
+
+	public static Box createPaddedBox(int axis) {
+		Box box = new Box(axis);
+		box.setBorder(new EmptyBorder(8, 8, 8, 8));
+		return box;
 	}
+
 }

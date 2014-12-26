@@ -30,6 +30,11 @@ import javax.swing.JTabbedPane;
 import javax.swing.UIManager;
 import javax.swing.WindowConstants;
 
+import com.gameminers.ethereal.browser.listener.MainWindowListener;
+import com.gameminers.ethereal.browser.utility.Components;
+import com.gameminers.ethereal.browser.utility.Directories;
+import com.gameminers.ethereal.browser.utility.Resources;
+
 import joptsimple.OptionParser;
 import joptsimple.OptionSet;
 import joptsimple.OptionSpec;
@@ -44,7 +49,7 @@ public class EtherealBrowser {
 		if (set.has(dir)) {
 			minecraftDirectory = set.valueOf(dir);
 		} else {
-			minecraftDirectory = Paths.getAppData("minecraft");
+			minecraftDirectory = Directories.getAppData("minecraft");
 		}
 		initLAF();
 		JFrame window = createWindow();
@@ -89,7 +94,7 @@ public class EtherealBrowser {
 		box.add(new JLabel("If neither is enabled, no assets can be found in your Minecraft directory."));
 		box.add(new JLabel("This could mean it is invalid, or you've never launched Minecraft."));
 		box.add(Box.createVerticalStrut(24));
-		box.add(new JLabel("The current Minecraft directory is "+Paths.tildize(getMinecraftDirectory().getAbsolutePath())));
+		box.add(new JLabel("The current Minecraft directory is "+Directories.tildize(getMinecraftDirectory().getAbsolutePath())));
 		return box;
 	}
 
@@ -116,7 +121,7 @@ public class EtherealBrowser {
 		File mods = new File(minecraftDirectory, "mods");
 		if (mods.exists()) {
 			boolean global = false;
-			for (File f : Paths.sort(mods.listFiles())) {
+			for (File f : Directories.sort(mods.listFiles())) {
 				String name = f.getName();
 				if (f.isDirectory() && (name.contains(".") || name.matches("[0-9][0-9]w[0-9][0-9][a-z]") )) {
 					menu.add(new JMenuItem(name));
@@ -139,10 +144,11 @@ public class EtherealBrowser {
 		menu.setIcon(Resources.loadPNGIconAsset("iface/open-vanilla"));
 		File indexes = new File(minecraftDirectory, "assets/indexes");
 		if (indexes.exists()) {
-			for (File f : Paths.sort(indexes.listFiles())) {
+			for (File f : Directories.sort(indexes.listFiles())) {
 				String name = f.getName();
 				if (name.endsWith(".json")) {
-					menu.add(new JMenuItem(name.substring(0, name.length()-5)));
+					JMenuItem item = new JMenuItem(name.substring(0, name.length()-5));
+					menu.add(item);
 				}
 			}
 		} else {

@@ -15,12 +15,14 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.gameminers.ethereal.browser;
+package com.gameminers.ethereal.browser.utility;
 
 import java.io.File;
 import java.util.Arrays;
 
-public class Paths {
+import com.gameminers.ethereal.browser.comparator.VersionComparator;
+
+public class Directories {
 	private static final boolean TILDIZE = getOS() == OperatingSystem.LINUX ||
 											getOS() == OperatingSystem.MAC;
 	private static final String USER_HOME;
