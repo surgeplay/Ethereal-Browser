@@ -12,6 +12,12 @@ If on Windows, run `gradlew distZip`.
 A new zip in build/distributions will be created.
 
 
+Screenshots
+===========
+![Home](http://i.imgur.com/GmDjpM4.png)
+![Auto-detected Minecraft assets indexes](http://i.imgur.com/3Ltl34N.png)
+![Browsing 1.8's assets](http://i.imgur.com/qFScuGB.png)
+
 Credits
 =======
 Interface icons (src/main/resources/assets/iface/*) are from the Fugue icon set by [Yusuke Kamiyamane](http://p.yusukekamiyamane.com/), which are licensed under a [Creative Commons Attribution 3.0 License](http://creativecommons.org/licenses/by/3.0/).
