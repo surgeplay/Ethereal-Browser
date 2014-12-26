@@ -1,5 +1,5 @@
 /*
- *  EtheralBrowser
+ *  EtherealBrowser
  *  Copyright (C) 2014 Aesen Vismea
  *
  *  This program is free software: you can redistribute it and/or modify
@@ -30,14 +30,14 @@ import javax.swing.JTabbedPane;
 import javax.swing.UIManager;
 import javax.swing.WindowConstants;
 
+import joptsimple.OptionParser;
+import joptsimple.OptionSet;
+import joptsimple.OptionSpec;
+
 import com.gameminers.ethereal.browser.listener.MainWindowListener;
 import com.gameminers.ethereal.browser.utility.Components;
 import com.gameminers.ethereal.browser.utility.Directories;
 import com.gameminers.ethereal.browser.utility.Resources;
-
-import joptsimple.OptionParser;
-import joptsimple.OptionSet;
-import joptsimple.OptionSpec;
 
 public class EtherealBrowser {
 	private static File minecraftDirectory;
