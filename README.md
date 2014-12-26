@@ -7,9 +7,9 @@ At least Java 7 is required to compile and run Ethereal Browser.
 
 Building
 ========
-If on Linux, run `./gradlew build`.
-If on Windows, run `gradlew build`.
-A new jar in build/libs will be created.
+If on Linux, run `./gradlew distZip`.
+If on Windows, run `gradlew distZip`.
+A new zip in build/distributions will be created.
 
 
 Credits

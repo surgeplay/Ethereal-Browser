@@ -8,6 +8,10 @@ repositories {
 
 apply plugin: 'java'
 apply plugin: 'eclipse'
+apply plugin: 'application'
+
+mainClassName = "com.gameminers.ethereal.browser.EtherealBrowser"
+
 
 dependencies {
 	compile 'com.google.code.gson:gson:2.3.1'
