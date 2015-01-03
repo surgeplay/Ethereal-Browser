@@ -15,7 +15,7 @@ repositories {
 	}
 }
 
-defaultTasks 'licenseFormat', 'build'
+defaultTasks 'licenseFormat', 'distZip'
 
 license {
 	header file('HEADER')
