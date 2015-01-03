@@ -1,6 +1,6 @@
 /*
- *  EtherealBrowser
- *  Copyright (C) 2014 Aesen Vismea
+ *  Ethereal Browser
+ *  Copyright (C) 2014-2015 Aesen Vismea
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -24,7 +24,7 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeCellRenderer;
 
 import com.gameminers.ethereal.browser.glue.Asset;
-import com.gameminers.ethereal.browser.utility.Resources;
+import com.gameminers.ethereal.lib.Resources;
 
 public class AssetTreeCellRenderer extends DefaultTreeCellRenderer {
 	private static final long serialVersionUID = -3990293584047882025L;

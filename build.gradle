@@ -1,3 +1,12 @@
+plugins {
+	id 'java'
+	id 'eclipse'
+	id 'idea'
+	id 'application'
+	
+	id 'com.github.hierynomus.license' version '0.11.0'
+}
+
 repositories {
 	mavenCentral()
 	maven {
@@ -6,9 +15,18 @@ repositories {
 	}
 }
 
-apply plugin: 'java'
-apply plugin: 'eclipse'
-apply plugin: 'application'
+defaultTasks 'licenseFormat', 'build'
+
+license {
+	header file('HEADER')
+	exclude '*.png'
+	sourceSets = project.sourceSets
+	ignoreFailures false
+	strictCheck true
+	mapping {
+		java = 'SLASHSTAR_STYLE'
+	}
+}
 
 mainClassName = "com.gameminers.ethereal.browser.EtherealBrowser"
 
@@ -16,4 +34,5 @@ mainClassName = "com.gameminers.ethereal.browser.EtherealBrowser"
 dependencies {
 	compile 'com.google.code.gson:gson:2.3.1'
 	compile 'net.sf.jopt-simple:jopt-simple:4.8'
+	compile 'com.gameminers:ethereallib:1.0'
 }

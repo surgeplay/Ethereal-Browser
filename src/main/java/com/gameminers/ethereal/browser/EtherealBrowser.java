@@ -1,6 +1,6 @@
 /*
- *  EtherealBrowser
- *  Copyright (C) 2014 Aesen Vismea
+ *  Ethereal Browser
+ *  Copyright (C) 2014-2015 Aesen Vismea
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -18,6 +18,7 @@
 package com.gameminers.ethereal.browser;
 
 import java.io.File;
+import java.util.Arrays;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -31,19 +32,19 @@ import javax.swing.JMenuItem;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.ScrollPaneConstants;
-import javax.swing.UIManager;
-import javax.swing.WindowConstants;
 
 import joptsimple.OptionParser;
 import joptsimple.OptionSet;
 import joptsimple.OptionSpec;
 
+import com.gameminers.ethereal.browser.ext.VersionComparator;
 import com.gameminers.ethereal.browser.listener.MainWindowListener;
 import com.gameminers.ethereal.browser.listener.ModdedOpenListener;
 import com.gameminers.ethereal.browser.listener.VanillaOpenListener;
-import com.gameminers.ethereal.browser.utility.Components;
-import com.gameminers.ethereal.browser.utility.Directories;
-import com.gameminers.ethereal.browser.utility.Resources;
+import com.gameminers.ethereal.lib.Components;
+import com.gameminers.ethereal.lib.Directories;
+import com.gameminers.ethereal.lib.Frames;
+import com.gameminers.ethereal.lib.Resources;
 import com.google.gson.Gson;
 
 public class EtherealBrowser {
@@ -61,8 +62,9 @@ public class EtherealBrowser {
 		} else {
 			minecraftDirectory = Directories.getAppData("minecraft");
 		}
-		initLAF();
-		window = createWindow();
+		Frames.initLAF();
+		window = Frames.create("Browser");
+		window.addWindowListener(new MainWindowListener());
 		
 		tabs = new JTabbedPane();
 		window.add(tabs);
@@ -72,29 +74,6 @@ public class EtherealBrowser {
 		tabs.addTab("", Resources.loadPNGIconAsset("iface/home"), createWelcomeScreen());
 		
 		window.setVisible(true);
-	}
-
-	private static void initLAF() {
-		try {
-			// try to set GTK+ first so we don't look hideous on Linux
-			// XXX - on a Windows system, will this set GTK+ if it's installed?
-			UIManager.setLookAndFeel("com.sun.java.swing.plaf.gtk.GTKLookAndFeel");
-		} catch (Exception e) {
-			try {
-				// otherwise, do what this JVM thinks is best
-				UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-			} catch (Exception ex) {}
-		}
-	}
-
-	private static JFrame createWindow() {
-		JFrame window = new JFrame("Ethereal Browser");
-		window.setIconImages(Resources.loadPNGAsset("iface/browser", "iface/browser-32"));
-		window.setSize(854, 480);
-		window.setLocationByPlatform(true);
-		window.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
-		window.addWindowListener(new MainWindowListener());
-		return window;
 	}
 	
 	private static Box createWelcomeScreen() {
@@ -131,7 +110,9 @@ public class EtherealBrowser {
 		File mods = new File(minecraftDirectory, "mods");
 		if (mods.exists()) {
 			boolean global = false;
-			for (File f : Directories.sort(mods.listFiles())) {
+			File[] files = mods.listFiles();
+			Arrays.sort(files, new VersionComparator());
+			for (File f : files) {
 				String name = f.getName();
 				if (f.isDirectory() && (name.contains(".") || name.matches("[0-9][0-9]w[0-9][0-9][a-z]") )) {
 					JMenuItem item = new JMenuItem(name);
@@ -158,7 +139,9 @@ public class EtherealBrowser {
 		menu.setIcon(Resources.loadPNGIconAsset("iface/open-vanilla"));
 		File indexes = new File(minecraftDirectory, "assets/indexes");
 		if (indexes.exists()) {
-			for (File f : Directories.sort(indexes.listFiles())) {
+			File[] files = indexes.listFiles();
+			Arrays.sort(files, new VersionComparator());
+			for (File f : files) {
 				String name = f.getName();
 				if (name.endsWith(".json")) {
 					JMenuItem item = new JMenuItem(name.substring(0, name.length()-5));

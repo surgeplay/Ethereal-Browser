@@ -1,6 +1,6 @@
 /*
- *  EtherealBrowser
- *  Copyright (C) 2014 Aesen Vismea
+ *  Ethereal Browser
+ *  Copyright (C) 2014-2015 Aesen Vismea
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by

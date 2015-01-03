@@ -1,6 +1,6 @@
 /*
- *  EtherealBrowser
- *  Copyright (C) 2014 Aesen Vismea
+ *  Ethereal Browser
+ *  Copyright (C) 2014-2015 Aesen Vismea
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -26,8 +26,8 @@ import java.nio.file.Path;
 import com.gameminers.ethereal.browser.EtherealBrowser;
 import com.gameminers.ethereal.browser.glue.AssetIndex;
 import com.gameminers.ethereal.browser.utility.Assets;
-import com.gameminers.ethereal.browser.utility.Dialogs;
-import com.gameminers.ethereal.browser.utility.Resources;
+import com.gameminers.ethereal.lib.Dialogs;
+import com.gameminers.ethereal.lib.Resources;
 
 public class VanillaOpenListener implements ActionListener {
 	private final Path index;
@@ -45,7 +45,7 @@ public class VanillaOpenListener implements ActionListener {
 			EtherealBrowser.addDocument(basename, Resources.getPNGIconAsset("iface/vanilla"),
 					Assets.buildTree(idx, objects));
 		} catch (Exception e1) {
-			Dialogs.showErrorDialog("An error occurred while loading "+index.getFileName(), e1);
+			Dialogs.showErrorDialog(EtherealBrowser.window, "An error occurred while loading "+index.getFileName(), e1);
 		}
 	}
 
